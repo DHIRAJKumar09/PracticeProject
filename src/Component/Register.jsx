@@ -112,7 +112,7 @@ const styles = {
   formBox: { 
     width: "300px",
     padding: "20px",
-    border: "1px solid #ccc",
+    border: "1px solid #d61515ff",
     borderRadius: "8px",
     textAlign: "center",
   },
@@ -121,16 +121,19 @@ const styles = {
     width: "90%",
     padding: "8px",
     borderRadius: "4px",
-    border: "1px solid #ddd",
+    border: "1px solid #130e97ff",
   },
   button: {
     width: "100%",
     padding: "10px",
-    backgroundColor: "#007bff",
-    color: "#fff",
+    backgroundColor: "#155dabff",
+    color: "#f6f1f3ff",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
+  },
+  buttonHover: {
+    backgroundColor: "#a320a1ff",
   },
   message: { marginTop: "10px", color: "green", fontWeight: "bold" },
 };
