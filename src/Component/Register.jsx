@@ -1,208 +1,82 @@
-
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Eye, Plus } from 'lucide-react';
+import '../Style/Register.css';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    password: "",
-    confirmPassword: "",
-    otp: ""
-  });
-
-  const [otpSent, setOtpSent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-
-
+  const initialState = { name: '', lastName: '', email: '', password: '', repeat: '' };
+  const [formData, setFormData] = useState(initialState);
+  const [error, setError] = useState(''); 
+  const [success, setSuccess] = useState('');
+  
   const handleChange = (e) => {
-    const { name, value } = e.target;
-
- 
-    if (name === "mobile") {
-      const onlyNums = value.replace(/[^0-9]/g, ""); 
-      if (onlyNums.length <= 10) {
-        setFormData({ ...formData, [name]: onlyNums });
-      }
-      return;
-    }
-
-   
-    if (name === "otp") {
-      const onlyNums = value.replace(/[^0-9]/g, ""); 
-      if (onlyNums.length <= 6) {
-        setFormData({ ...formData, [name]: onlyNums });
-      }
-      return;
-    }
-
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (error) setError(''); 
+    if (success) setSuccess('');
   };
 
-  
-  const sendOtp = () => {
-    if (formData.mobile.length !== 10) {
-      setMessage("❌ Please enter a 10-digit mobile number");
-      return;
-    }
-
-    setLoading(true);
-    setMessage("");
-
-    setTimeout(() => {
-      setOtpSent(true); 
-      setLoading(false);
-      setMessage("OTP sent successfully! ✅");
-    }, 600);
-  };
-
-  
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
-      setMessage("❌ Passwords do not match");
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
+    
+    if (!passwordRegex.test(formData.password)) {
+      setError("Password must be 8+ characters with 1 uppercase and 1 special character.");
+      return;
+    }
+    if (formData.password !== formData.repeat) {
+      setError("Passwords do not match!");
       return;
     }
 
-    if (formData.otp.length !== 6) {
-      setMessage("❌ Please enter a 6-digit OTP");
-      return;
-    }
-
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-      setMessage("Registration successful! 🎉");
-     
-      setFormData({
-        name: "", email: "", mobile: "", password: "", confirmPassword: "", otp: ""
-      });
-      setOtpSent(false);
-    }, 1000);
+    setError('');
+    setSuccess(`Registration Successful for ${formData.name}!`);
+    setFormData(initialState);
+    setTimeout(() => setSuccess(''), 4000);
   };
 
   return (
-    <div style={styles.container}>
-      <form style={styles.form} onSubmit={handleSubmit}>
-        <h2 style={styles.title}>Create Account</h2>
-
-        {message && (
-          <div style={{
-            ...styles.message,
-            backgroundColor: message.includes("successful") || message.includes("✅") ? "#d4edda" : "#f8d7da",
-            color: message.includes("successful") || message.includes("✅") ? "#155724" : "#721c24"
-          }}>
-            {message}
-          </div>
-        )}
-
-        <input
-          style={styles.input}
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          style={styles.input}
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-
-        <div style={styles.mobileRow}>
-          <input
-            style={{ ...styles.input, flex: 1 }}
-            type="tel"
-            name="mobile"
-            placeholder="Mobile (10 digits)"
-            value={formData.mobile}
-            onChange={handleChange}
-            required
-            disabled={otpSent} 
-          />
-          {!otpSent && (
-            <button 
-              type="button" 
-              onClick={sendOtp} 
-              disabled={loading} 
-              style={styles.otpBtn}
-            >
-              {loading ? "..." : "Send OTP"}
-            </button>
-          )}
+    <div className="full-page-bg">
+      <div className="register-container">
+        <div className="sidebar">
+          <div className="logo">GENESIS</div>
+          <h1>New User<br/>Registration.</h1>
+          <div className="sidebar-footer">TERMS OF USE AND CONTRAINDICATIONS</div>
         </div>
 
-        {otpSent && (
-          <div style={styles.otpSection}>
-            <input
-              style={styles.input}
-              type="text"
-              name="otp"
-              placeholder="6-digit OTP"
-              value={formData.otp}
-              onChange={handleChange}
-              maxLength="6"
-              inputMode="numeric"
-              required
-            />
+        <div className="form-content">
+          <h2 className="title">SIGN UP</h2>
+          <div className="profile-wrapper">
+            <div className="profile-circle">
+              <img src="https://images.pexels.com/photos/11412540/pexels-photo-11412540.jpeg?auto=compress&cs=tinysrgb&w=200" alt="user" />
+            </div>
+            <div className="add-btn"><Plus size={12} color="white"/></div>
           </div>
-        )}
 
-        <input
-          style={styles.input}
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          style={styles.input}
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          required
-        />
-
-        <button 
-          type="submit" 
-          disabled={loading} 
-          style={{
-            ...styles.submitBtn,
-            backgroundColor: loading ? "#ccc" : "#1877f2"
-          }}
-        >
-          {loading ? "Processing..." : "Register"}
-        </button>
-      </form>
+          <form className="main-form" onSubmit={handleSubmit}>
+            <div className="input-row">
+              <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
+              <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
+            </div>
+            <input type="email" name="email" placeholder="Email" className="full-width" value={formData.email} onChange={handleChange} required />
+            <div className="input-row">
+              <div className="pass-box">
+                <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+                <Eye className="eye-icon" size={16}/>
+              </div>
+              <div className="pass-box">
+                <input type="password" name="repeat" placeholder="Repeat" value={formData.repeat} onChange={handleChange} required />
+                <Eye className="eye-icon" size={16}/>
+              </div>
+            </div>
+            <div className="message-area">
+              {error && <div className="error-text">{error}</div>}
+              {success && <div className="success-text">{success}</div>}
+            </div>
+            <button type="submit" className="submit-button">CREATE ACCOUNT</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
-};
-
-const styles = {
-  container: { display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "#f0f2f5", fontFamily: "sans-serif" },
-  form: { width: "100%", maxWidth: "380px", backgroundColor: "#fff", padding: "30px", borderRadius: "12px", boxShadow: "0 10px 25px rgba(0,0,0,0.08)", display: "flex", flexDirection: "column", gap: "15px" },
-  title: { textAlign: "center", margin: "0 0 10px 0", color: "#333" },
-  message: { padding: "12px", borderRadius: "8px", fontSize: "14px", textAlign: "center" },
-  input: { padding: "12px 15px", borderRadius: "8px", border: "1px solid #ddd", fontSize: "15px", outline: "none" },
-  mobileRow: { display: "flex", gap: "10px" },
-  otpBtn: { padding: "0 15px", backgroundColor: "#42b72a", color: "white", border: "none", borderRadius: "8px", cursor: "pointer", fontWeight: "bold" },
-  otpSection: { padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "8px", border: "1px dashed #ccc", display: "flex", flexDirection: "column" },
-  submitBtn: { padding: "14px", color: "white", border: "none", borderRadius: "8px", fontSize: "16px", fontWeight: "bold", cursor: "pointer", marginTop: "10px" }
 };
 
 export default Register;

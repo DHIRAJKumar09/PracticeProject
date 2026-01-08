@@ -1,104 +1,68 @@
 import React, { useState } from "react";
+import "./Login.css";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (email === "admin@gmail.com" && password === "12345") {
-      alert("Login Successful ✅");
-    } else {
-      alert("Invalid Credentials ❌");
-    }
-  };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div style={styles.container}>
-      <form style={styles.card} onSubmit={handleSubmit}>
-        <h2 style={styles.title}>Login</h2>
+    <div className="login-container">
+      {/* LEFT PANEL */}
+      <div className="login-left">
+        <h4 className="brand">GENESIS</h4>
+        <h1>Welcome Back.</h1>
+        <p>Login to continue your journey with us.</p>
 
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
-          required
-        />
+        <span className="footer-text">
+          TERMS OF USE AND CONTRAINDICATIONS
+        </span>
+      </div>
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-          required
-        />
+      {/* RIGHT PANEL */}
+      <div className="login-right">
+        <h2>LOGIN</h2>
 
-        <button type="submit" style={styles.button}>
-          Login
-        </button>
+        <div className="avatar">
+          <img
+            src="https://i.imgur.com/1X6bY6G.png"
+            alt="avatar"
+          />
+        </div>
 
-        <p style={styles.text}>
-          Don't have an account? <span style={styles.link}><a href="/register">Sign Up</a></span>
-        </p>
-      </form>
+        <form>
+          <input
+            type="email"
+            placeholder="Email address"
+            required
+          />
+
+          <div className="password-box">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              required
+            />
+            <span
+              className="eye"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              👁
+            </span>
+          </div>
+
+          <a href="#" className="forgot">
+            Forgot Password?
+          </a>
+
+          <button type="submit">LOGIN</button>
+
+          <p className="signup-text">
+            Don’t have an account? <a href="#">Sign Up</a>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };
 
-const styles = {
-  container: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "linear-gradient(135deg, #667eea, #764ba2)",
-  },
-  card: {
-    background: "#fff",
-    padding: "40px",
-    width: "320px",
-    borderRadius: "12px",
-    boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-    textAlign: "center",
-  },
-  title: {
-    marginBottom: "20px",
-    color: "#333",
-  },
-  input: {
-    width: "100%",
-    padding: "12px",
-    margin: "10px 0",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-    outline: "none",
-    fontSize: "14px",
-  },
-  button: {
-    width: "100%",
-    padding: "12px",
-    marginTop: "15px",
-    background: "#667eea",
-    color: "#fff",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontSize: "16px",
-  },
-  text: {
-    marginTop: "15px",
-    fontSize: "14px",
-    color: "#555",
-  },
-  link: {
-    color: "#667eea",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
-};
-
 export default Login;
+

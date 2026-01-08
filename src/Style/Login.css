@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.login-container {
+  width: 900px;
+  height: 520px;
+  display: flex;
+  background: #1f2933;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* LEFT PANEL */
+.login-left {
+  width: 40%;
+  background: linear-gradient(180deg, #4c3b6e, #2a2342);
+  padding: 40px;
+  color: #fff;
+  position: relative;
+}
+
+.brand {
+  font-size: 14px;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+.login-left h1 {
+  margin-top: 120px;
+  font-size: 36px;
+}
+
+.login-left p {
+  margin-top: 15px;
+  opacity: 0.8;
+}
+
+.footer-text {
+  position: absolute;
+  bottom: 25px;
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+/* RIGHT PANEL */
+.login-right {
+  width: 60%;
+  padding: 50px;
+  color: #fff;
+}
+
+.login-right h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.avatar img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+form {
+  max-width: 400px;
+  margin: auto;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  background: #eaf1ff;
+  font-size: 14px;
+}
+
+.password-box {
+  position: relative;
+}
+
+.eye {
+  position: absolute;
+  right: 15px;
+  top: 13px;
+  cursor: pointer;
+}
+
+.forgot {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: #9ca3af;
+  text-decoration: none;
+  margin-bottom: 25px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  border: none;
+  background: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-text {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.signup-text a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* PAGE CENTER */
+body {
+  background: radial-gradient(circle at top, #111827, #000);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
