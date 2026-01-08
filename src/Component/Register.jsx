@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff, Plus } from 'lucide-react';
+<<<<<<< HEAD
+import { Eye, Plus } from 'lucide-react';
+=======
+import { Eye, EyeOff, Plus } from 'lucide-react'; // 1. Added EyeOff
+>>>>>>> e1aed918fc67f4c13e043267245f654b8ec9c430
 import '../Style/Register.css';
 
 const Register = () => {
   const initialState = { name: '', lastName: '', email: '', password: '', repeat: '' };
   const [formData, setFormData] = useState(initialState);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(''); 
   const [success, setSuccess] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+<<<<<<< HEAD
+  
+=======
+  const [showPassword, setShowPassword] = useState(false); // You added this - Good!
 
+>>>>>>> e1aed918fc67f4c13e043267245f654b8ec9c430
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (error) setError('');
+    if (error) setError(''); 
     if (success) setSuccess('');
   };
 
+<<<<<<< HEAD
+=======
   const togglePasswordVisibility = () => {
-    setShowPassword(prev => !prev);
+    setShowPassword(!showPassword); // You added this - Good!
   };
 
+>>>>>>> e1aed918fc67f4c13e043267245f654b8ec9c430
   const handleSubmit = (e) => {
     e.preventDefault();
     const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
@@ -65,30 +76,12 @@ const Register = () => {
 <<<<<<< HEAD
             <div className="input-row">
               <div className="pass-box">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-                <span onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
-                  {showPassword ? <EyeOff size={16} className="eye-icon" /> : <Eye size={16} className="eye-icon" />}
-                </span>
+                <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+                <Eye className="eye-icon" size={16}/>
               </div>
               <div className="pass-box">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  name="repeat"
-                  placeholder="Repeat"
-                  value={formData.repeat}
-                  onChange={handleChange}
-                  required
-                />
-                <span onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
-                  {showPassword ? <EyeOff size={16} className="eye-icon" /> : <Eye size={16} className="eye-icon" />}
-                </span>
+                <input type="password" name="repeat" placeholder="Repeat" value={formData.repeat} onChange={handleChange} required />
+                <Eye className="eye-icon" size={16}/>
               </div>
             </div>
 =======
